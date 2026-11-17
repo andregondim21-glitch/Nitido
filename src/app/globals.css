@@ -1,0 +1,452 @@
+/*
+  Nítido: tinta sobre papel. A interface é monocromática de propósito:
+  toda cor que aparece na tela é dado, e muda com o modo de visão escolhido
+  (as paletas são geradas de src/lib/visao/paletas.json no <head>).
+*/
+
+:root {
+  color-scheme: light;
+
+  --papel: #eff1ee;
+  --folha: #ffffff;
+  --tinta: #000000;
+  --tinta-2: #454b47;
+  --tinta-3: #5d6460;
+  --fio: #c3c9c4;
+  --fio-claro: #dde2de;
+  --lavado: #e3e7e3;
+
+  --fonte: var(--font-atkinson), "Atkinson Hyperlegible", system-ui, sans-serif;
+
+  /* Escala tipográfica, razão ~1,25 a partir do corpo de 17px */
+  --t-2: 0.8125rem;
+  --t-1: 0.9375rem;
+  --t0: 1.0625rem;
+  --t1: 1.3125rem;
+  --t2: 1.625rem;
+  --t3: 2.0625rem;
+  --t4: clamp(1.75rem, 4.4vw, 2.875rem);
+  --t5: clamp(2.125rem, 6.2vw, 4.5rem);
+
+  --raio: 6px;
+  --raio-g: 12px;
+  --margem: clamp(16px, 4vw, 40px);
+  --largura: 1200px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 24px;
+}
+
+body {
+  min-height: 100dvh;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: var(--fonte);
+  font-size: var(--t0);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  letter-spacing: inherit;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1.5px;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+  padding: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--tinta);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.pular {
+  position: absolute;
+  left: 12px;
+  top: -100px;
+  z-index: 30;
+  padding: 10px 16px;
+  background: var(--tinta);
+  color: var(--papel);
+  border-radius: var(--raio);
+  font-weight: 700;
+}
+
+.pular:focus {
+  top: 12px;
+}
+
+/* Destino do "Pular para o conteúdo": recebe o foco sem desenhar moldura na página inteira. */
+main:focus {
+  outline: none;
+}
+
+.conteiner {
+  width: 100%;
+  max-width: calc(var(--largura) + 2 * var(--margem));
+  margin-inline: auto;
+  padding-inline: var(--margem);
+}
+
+.numeros {
+  font-variant-numeric: tabular-nums;
+}
+
+.link {
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.22em;
+}
+
+.link:hover {
+  text-decoration-thickness: 3px;
+}
+
+/* --- Botões ------------------------------------------------------------------ */
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  min-height: 44px;
+  padding: 0 1.1rem;
+  border: 1.5px solid var(--tinta);
+  border-radius: var(--raio);
+  background: transparent;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.botao:hover {
+  background: var(--lavado);
+}
+
+.botao:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.botao-primario {
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+.botao-primario:hover {
+  background: #2d322f;
+}
+
+.botao-quieto {
+  border-color: transparent;
+  padding-inline: 0.6rem;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.22em;
+}
+
+.botao-icone {
+  width: 44px;
+  padding: 0;
+}
+
+/* --- Campos de formulário -------------------------------------------------------- */
+
+.campo {
+  display: grid;
+  gap: 6px;
+}
+
+.campo > label,
+.campo > .rotulo {
+  font-weight: 700;
+}
+
+.entrada {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 12px;
+  border: 1.5px solid var(--tinta-3);
+  border-radius: var(--raio);
+  background: var(--folha);
+}
+
+.entrada:hover {
+  border-color: var(--tinta);
+}
+
+.entrada:focus-visible {
+  border-color: var(--tinta);
+  outline-offset: 1px;
+}
+
+.entrada[aria-invalid="true"] {
+  border-color: var(--tinta);
+  border-width: 2.5px;
+}
+
+.erro {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  font-size: var(--t-1);
+  font-weight: 700;
+}
+
+.dica-campo {
+  font-size: var(--t-1);
+  color: var(--tinta-2);
+}
+
+/* Grupo de opções exclusivas que parece um seletor segmentado */
+.segmentos {
+  display: inline-flex;
+  padding: 3px;
+  gap: 3px;
+  border: 1.5px solid var(--tinta);
+  border-radius: calc(var(--raio) + 3px);
+  background: var(--folha);
+}
+
+.segmentos label {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: var(--raio);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.segmentos input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.segmentos label:has(input:checked) {
+  background: var(--tinta);
+  color: var(--papel);
+}
+
+.segmentos label:has(input:focus-visible) {
+  outline: 3px solid var(--tinta);
+  outline-offset: 2px;
+}
+
+.segmentos label:not(:has(input:checked)):hover {
+  background: var(--lavado);
+}
+
+/* --- Cores de dado e texturas -------------------------------------------------- */
+
+/*
+  Cada marca colorida recebe três variáveis: --c (cor), --t (traço da textura) e
+  --s (cor de ícone por cima). A textura mora num ::after e aparece quando o
+  ancestral mais próximo diz data-texturas="sim"; "Outros" tem textura sempre.
+*/
+[data-texturas="sim"] {
+  --texturas: 1;
+}
+
+[data-texturas="nao"] {
+  --texturas: 0;
+}
+
+[data-cat="moradia"] {
+  --c: var(--cat-moradia);
+  --t: var(--cat-moradia-traco);
+  --s: var(--cat-moradia-sobre);
+  --textura: repeating-linear-gradient(45deg, var(--t) 0 1.5px, transparent 1.5px 6px);
+}
+
+[data-cat="mercado"] {
+  --c: var(--cat-mercado);
+  --t: var(--cat-mercado-traco);
+  --s: var(--cat-mercado-sobre);
+  --textura: radial-gradient(circle, var(--t) 1.4px, transparent 1.9px) 0 0 / 6px 6px;
+}
+
+[data-cat="transporte"] {
+  --c: var(--cat-transporte);
+  --t: var(--cat-transporte-traco);
+  --s: var(--cat-transporte-sobre);
+  --textura: repeating-linear-gradient(-45deg, var(--t) 0 1.5px, transparent 1.5px 6px);
+}
+
+[data-cat="saude"] {
+  --c: var(--cat-saude);
+  --t: var(--cat-saude-traco);
+  --s: var(--cat-saude-sobre);
+  --textura:
+    repeating-linear-gradient(45deg, var(--t) 0 1.25px, transparent 1.25px 7px),
+    repeating-linear-gradient(-45deg, var(--t) 0 1.25px, transparent 1.25px 7px);
+}
+
+[data-cat="educacao"] {
+  --c: var(--cat-educacao);
+  --t: var(--cat-educacao-traco);
+  --s: var(--cat-educacao-sobre);
+  --textura: repeating-linear-gradient(45deg, var(--t) 0 4px, transparent 4px 11px);
+}
+
+[data-cat="restaurantes"] {
+  --c: var(--cat-restaurantes);
+  --t: var(--cat-restaurantes-traco);
+  --s: var(--cat-restaurantes-sobre);
+  --textura: repeating-linear-gradient(-45deg, var(--t) 0 4px, transparent 4px 11px);
+}
+
+[data-cat="lazer"] {
+  --c: var(--cat-lazer);
+  --t: var(--cat-lazer-traco);
+  --s: var(--cat-lazer-sobre);
+  --textura: radial-gradient(circle, var(--t) 2.4px, transparent 2.9px) 0 0 / 10px 10px;
+}
+
+[data-cat="assinaturas"] {
+  --c: var(--cat-assinaturas);
+  --t: var(--cat-assinaturas-traco);
+  --s: var(--cat-assinaturas-sobre);
+  --textura: none;
+}
+
+[data-cat="outros"] {
+  --c: var(--papel);
+  --t: var(--tinta-2);
+  --s: var(--tinta);
+  --sempre: 1;
+  --textura: repeating-linear-gradient(45deg, var(--t) 0 1.25px, transparent 1.25px 5px);
+}
+
+[data-cat="salario"],
+[data-cat="freelance"],
+[data-cat="rendimentos"],
+[data-cat="outras-entradas"] {
+  --c: var(--fx-entrada);
+  --s: var(--fx-entrada-sobre);
+}
+
+[data-fluxo="entrada"] {
+  --c: var(--fx-entrada);
+  --s: var(--fx-entrada-sobre);
+}
+
+[data-fluxo="saida"] {
+  --c: var(--fx-saida);
+  --s: var(--fx-saida-sobre);
+}
+
+.preenchimento {
+  position: relative;
+  background-color: var(--c);
+  forced-color-adjust: none;
+}
+
+.preenchimento::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--textura, none);
+  opacity: max(var(--texturas, 0), var(--sempre, 0));
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+/* Simulação de visão (prévia para quem não tem daltonismo); filtros em FiltrosSimulacao */
+[data-simulacao="protan"] .quadro {
+  filter: url(#simular-protan);
+}
+
+[data-simulacao="deutan"] .quadro {
+  filter: url(#simular-deutan);
+}
+
+[data-simulacao="tritan"] .quadro {
+  filter: url(#simular-tritan);
+}
+
+[data-simulacao="acromatopsia"] .quadro {
+  filter: url(#simular-acromatopsia);
+}
+
+/* A faixa da simulação fica fixa no rodapé da janela; o conteúdo e os avisos sobem. */
+[data-simulacao]:not([data-simulacao="nenhuma"]) {
+  --altura-simulacao: 80px;
+}
+
+[data-simulacao]:not([data-simulacao="nenhuma"]) body {
+  padding-bottom: var(--altura-simulacao);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

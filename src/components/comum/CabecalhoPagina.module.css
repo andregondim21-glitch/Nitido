@@ -1,0 +1,26 @@
+.cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+  padding-block: clamp(28px, 5vw, 48px) clamp(24px, 4vw, 40px);
+}
+
+.navegacao {
+  display: flex;
+  gap: 6px;
+}
+
+.titulo {
+  font-size: var(--t4);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.voltar {
+  align-self: center;
+}
+
+.extra {
+  margin-left: auto;
+}

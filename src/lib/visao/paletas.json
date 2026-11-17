@@ -1,0 +1,66 @@
+{
+  "padrao": {
+    "categorias": {
+      "moradia": "#7e4a0b",
+      "mercado": "#368d28",
+      "transporte": "#c4b914",
+      "saude": "#fc9099",
+      "educacao": "#a38dfd",
+      "restaurantes": "#0850ab",
+      "lazer": "#bb4b8b",
+      "assinaturas": "#17d0d9"
+    },
+    "fluxo": {
+      "entrada": "#2f7d4a",
+      "saida": "#c4473a"
+    }
+  },
+  "protanopia": {
+    "categorias": {
+      "moradia": "#7e390b",
+      "mercado": "#5c7b13",
+      "transporte": "#e39385",
+      "saude": "#4cc8ee",
+      "educacao": "#8489fe",
+      "restaurantes": "#623c8c",
+      "lazer": "#0b7a9a",
+      "assinaturas": "#9cca41"
+    },
+    "fluxo": {
+      "entrada": "#2a6fd6",
+      "saida": "#a97515"
+    }
+  },
+  "deuteranopia": {
+    "categorias": {
+      "moradia": "#814714",
+      "mercado": "#028f96",
+      "transporte": "#959dfe",
+      "saude": "#65c3a5",
+      "educacao": "#a87e2c",
+      "restaurantes": "#643b7b",
+      "lazer": "#6262da",
+      "assinaturas": "#fca000"
+    },
+    "fluxo": {
+      "entrada": "#2166c4",
+      "saida": "#bb6802"
+    }
+  },
+  "tritanopia": {
+    "categorias": {
+      "moradia": "#b32707",
+      "mercado": "#086333",
+      "transporte": "#f7665b",
+      "saude": "#49cc95",
+      "educacao": "#a07e26",
+      "restaurantes": "#752f71",
+      "lazer": "#218aa8",
+      "assinaturas": "#cca0e7"
+    },
+    "fluxo": {
+      "entrada": "#00857a",
+      "saida": "#d6336c"
+    }
+  }
+}

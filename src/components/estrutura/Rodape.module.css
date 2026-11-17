@@ -1,0 +1,25 @@
+.rodape {
+  margin-top: 96px;
+  border-top: 1px solid var(--fio);
+}
+
+.linha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px 24px;
+  padding-block: 20px 28px;
+}
+
+.acoes,
+.confirmacao {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.acoes :global(.botao-quieto) {
+  font-size: var(--t-1);
+}

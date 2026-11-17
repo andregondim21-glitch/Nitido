@@ -1,0 +1,242 @@
+Issue ID,Parent,Issue Type,Summary,Epic Name,Description,Priority,Story Points,Labels,Labels
+1,,Epic,Descoberta e planejamento,Descoberta e planejamento,*Objetivo:* Entender como o daltonismo atrapalha a leitura de finanças em apps e transformar isso em requisitos e backlog.,,,planejamento,
+2,,Epic,Design e paletas de cor,Design e paletas de cor,"*Objetivo:* Identidade visual em que a cor só aparece como dado, com uma paleta validada para cada tipo de visão.",,,design,
+3,,Epic,Fundação técnica,Fundação técnica,"*Objetivo:* Projeto, camada de dados e estrutura de navegação que as funcionalidades usam.",,,fundacao,
+4,,Epic,Lançamentos,Lançamentos,"*Objetivo:* Registrar, consultar e exportar entradas e saídas.",,,lancamentos,
+5,,Epic,Resumo do mês,Resumo do mês,"*Objetivo:* Mostrar num relance quanto entrou, quanto saiu e para onde foi o dinheiro.",,,resumo,
+6,,Epic,Visão de cores,Visão de cores,"*Objetivo:* Adaptar o app para protanopia, deuteranopia e tritanopia.",,,visao-de-cores,
+7,,Epic,Qualidade e entrega,Qualidade e entrega,"*Objetivo:* Acessibilidade, responsividade, correções, testes e publicação.",,,qualidade,
+101,1,Task,Pesquisar os tipos de daltonismo e o impacto em apps de finanças,,"*Objetivo:* Entender quais cores cada tipo de visão confunde e onde apps de finanças dependem só de cor.
+
+*Critérios de aceite*
+* Resumo dos três tipos pedidos (protanopia, deuteranopia e tritanopia): cores confundidas e prevalência.
+* Lista de padrões problemáticos em apps de banco: entrada verde e saída vermelha, pizza só por cor, alertas só por cor.
+* Critérios da WCAG 2.2 relacionados: 1.4.1 Uso de cor, 1.4.3 e 1.4.11 Contraste.
+* Modelo de simulação escolhido e referência: Machado, Oliveira e Fernandes (2009).",High,3,planejamento,sprint-1
+102,1,Task,Definir personas e requisitos,,"*Objetivo:* Registrar para quem é o app e o que ele precisa fazer.
+
+*Critérios de aceite*
+* Três personas: pessoa com deuteranopia que acompanha os gastos pelo celular; pessoa com tritanopia; familiar sem daltonismo que ajuda nas contas.
+* Requisitos funcionais numerados: registrar entradas e saídas, categorias, resumo mensal, exportação e escolha do modo de visão.
+* Requisitos não funcionais: WCAG 2.2 AA, textos em português, funcionar a partir de 375px, dados só no navegador e nenhuma informação só por cor.",High,3,planejamento,sprint-1
+103,1,Task,Montar o backlog e planejar as sprints,,"*Objetivo:* Organizar o trabalho em épicos, histórias e sprints.
+
+*Critérios de aceite*
+* Épicos e histórias com critérios de aceite e estimativa em pontos.
+* Prioridades definidas e seis sprints de duas semanas planejadas.
+* Definição de pronto combinada com o time.",Medium,2,planejamento,sprint-1
+104,2,Story,Direção visual e tipografia,,"*História:* Como pessoa com daltonismo, quero uma interface em que a cor só apareça quando significa algo, para não precisar adivinhar o que cada cor quer dizer.
+
+*Critérios de aceite*
+* Interface em tinta sobre papel, sem cor de marca, com tokens de cor definidos (papel, tinta, textos secundários e fios).
+* Texto com contraste de pelo menos 4,5:1 sobre o fundo.
+* Fonte Atkinson Hyperlegible Next, com escala tipográfica definida e algarismos tabulares nas colunas de números.",High,3,design,sprint-1
+105,2,Task,Protótipo das telas no desktop e no celular,,"*Objetivo:* Validar o layout antes de programar.
+
+*Critérios de aceite*
+* Telas de Resumo e Lançamentos, formulário de lançamento e painel de visão de cores.
+* Versões com 1440px e 375px de largura.
+* Revisado contra as personas e os requisitos.",Medium,5,design,sprint-1
+106,2,Story,Paletas de gráficos para cada tipo de visão,,"*História:* Como pessoa com daltonismo, quero que as cores dos gráficos sejam escolhidas para o meu tipo de visão, para distinguir cada categoria sem esforço.
+
+*Critérios de aceite*
+* Quatro paletas: padrão, protanopia, deuteranopia e tritanopia.
+* Cada paleta tem 8 cores de categoria e 2 de entrada e saída.
+* Menor diferença entre duas categorias (ΔE em OKLab ×100): pelo menos 10 na visão do modo e 15 em visão típica.
+* Todas as cores ficam num único arquivo (paletas.json).",Highest,8,design,sprint-2
+107,2,Task,Script de validação das paletas,,"*Objetivo:* Tornar a validação das cores repetível com npm run paletas.
+
+*Critérios de aceite*
+* Simula cada tipo de visão com as matrizes de Machado (2009), severidade 1.0.
+* Mede o pior par de cores de cada paleta e o contraste das cores de entrada e saída sobre o fundo (mínimo de 3:1).
+* Termina com erro quando alguma verificação falha.",High,3,design,sprint-2
+108,3,Task,Criar o projeto Next.js com TypeScript e ESLint,,"*Objetivo:* Ter a base do projeto pronta para o time começar.
+
+*Critérios de aceite*
+* Next.js 16 com App Router, TypeScript estrito e CSS Modules.
+* Scripts dev, build, lint e typecheck funcionando.
+* Pastas src/app, src/components e src/lib criadas.",Highest,2,fundacao,sprint-1
+109,3,Task,Camada de dados com armazenamento no navegador,,"*Objetivo:* Guardar os lançamentos no navegador com segurança.
+
+*Critérios de aceite*
+* Tipos de lançamento e categoria, com valores em centavos e datas no formato AAAA-MM-DD.
+* Dados salvos no localStorage; registros inválidos são descartados na leitura.
+* Se o JSON salvo estiver ilegível, uma cópia é guardada antes de recomeçar.
+* Mudanças feitas em outra aba aparecem sem recarregar a página.
+* Sem erro de hidratação: nada que depende do navegador é renderizado no servidor.",High,5,fundacao,sprint-2
+110,3,Task,Dados de exemplo para o primeiro acesso,,"*Objetivo:* Mostrar o app funcionando antes de a pessoa cadastrar qualquer coisa.
+
+*Critérios de aceite*
+* Seis meses de lançamentos terminando no dia atual, sempre iguais para a mesma data.
+* Entradas e saídas em todas as categorias, para os gráficos terem o que mostrar.",Medium,2,fundacao,sprint-2
+111,3,Task,"Formatação em português de moeda, datas e valores",,"*Objetivo:* Mostrar e ler valores no formato brasileiro.
+
+*Critérios de aceite*
+* Moeda no formato R$ 1.234,56; meses e dias por extenso em português.
+* O campo de valor aceita ""1.234,56"", ""1234.5"" e ""R$ 80"".
+* Datas tratadas como datas de calendário, sem mudar de dia por causa do fuso horário.",Medium,2,fundacao,sprint-2
+112,3,Story,"Navegação entre páginas e meses, com avisos",,"*História:* Como alguém que controla os gastos, quero trocar de página e de mês rapidamente, para comparar meses sem me perder.
+
+*Critérios de aceite*
+* Cabeçalho com Resumo e Lançamentos, marcando a página atual.
+* Setas de mês anterior e próximo que valem para todas as páginas, e botão para voltar ao mês atual.
+* Avisos temporários com ação opcional (como ""Desfazer""), anunciados para leitores de tela.
+* Link ""Pular para o conteúdo"".",High,3,fundacao,sprint-3
+113,4,Story,Registrar um lançamento,,"*História:* Como alguém que controla os gastos, quero registrar uma entrada ou uma saída com valor, data, descrição e categoria, para manter minhas contas em dia.
+
+*Critérios de aceite*
+* Formulário em diálogo, com o foco começando no campo Valor.
+* Tipo Saída ou Entrada, identificado também pelos sinais − e +.
+* Categorias com ícone e nome, que mudam conforme o tipo.
+* Erros aparecem com ícone e texto junto ao campo, e o foco vai para o primeiro campo com erro.
+* Depois de salvar aparece ""Lançamento salvo.""; se a data for de outro mês, o aviso cita o mês e oferece ""Ver mês"".",Highest,5,lancamentos,sprint-3
+114,4,Story,"Editar e excluir lançamentos, com desfazer",,"*História:* Como alguém que registra muitos gastos, quero corrigir ou apagar um lançamento, e voltar atrás se apagar por engano.
+
+*Critérios de aceite*
+* Clicar num lançamento abre o formulário preenchido.
+* Salvar a edição mostra ""Lançamento atualizado."".
+* ""Excluir lançamento"" remove na hora e oferece ""Desfazer"" por 8 segundos.",High,3,lancamentos,sprint-3
+115,4,Story,Lista de lançamentos do mês por dia,,"*História:* Como alguém que confere o extrato, quero ver os lançamentos agrupados por dia, para achar um gasto pela data.
+
+*Critérios de aceite*
+* Dias do mais recente para o mais antigo, com o saldo de cada dia.
+* Valores sempre em preto, com + para entradas e − para saídas.
+* Cada linha tem o selo da categoria (cor e ícone) e o nome dela.
+* Mês sem lançamentos mostra o botão ""Novo lançamento"".",High,3,lancamentos,sprint-3
+116,4,Story,Exportar lançamentos em CSV,,"*História:* Como alguém que também usa planilha, quero exportar meus lançamentos, para analisar no Excel.
+
+*Critérios de aceite*
+* Separador "";"" e vírgula decimal, em UTF-8, abrindo direto no Excel em português.
+* Textos que começam com =, +, - ou @ recebem um apóstrofo, para não virarem fórmula.",Low,2,lancamentos,sprint-3
+117,4,Story,Filtrar e buscar lançamentos,,"*História:* Como alguém com muitos lançamentos, quero filtrar e buscar, para encontrar um gasto específico.
+
+*Critérios de aceite*
+* Filtro por tipo (todos, entradas, saídas) e por categoria.
+* Busca por descrição que ignora acentos e maiúsculas: ""farmacia"" encontra ""Farmácia"".
+* Total de entradas e saídas do resultado filtrado.
+* Sem resultado: mensagem e botão ""Limpar filtros"".",Medium,3,lancamentos,sprint-5
+118,5,Story,"Conta do mês: entradas, saídas e saldo",,"*História:* Como alguém que controla os gastos, quero ver quanto entrou, quanto saiu e quanto sobrou no mês, para saber se o mês fechou positivo.
+
+*Critérios de aceite*
+* Montada como conta armada: entradas, ""−"" saídas e ""="" resultado, com os algarismos alinhados.
+* O resultado se chama ""sobraram"" ou ""faltaram"", sem depender de cor.
+* Frase com o percentual guardado do que entrou.
+* O tamanho dos números se ajusta à largura disponível, sem invadir a coluna ao lado.",Highest,5,resumo,sprint-3
+119,5,Story,Para onde foi o dinheiro,,"*História:* Como alguém que quer gastar melhor, quero ver as saídas do mês divididas por categoria, para saber onde cortar.
+
+*Critérios de aceite*
+* Faixa única com um trecho por categoria, separados por 2px de fundo; ""Outros"" sempre por último.
+* Tabela com valor, parcela e comparação com o mês anterior, que também serve de legenda.
+* Passar o mouse num trecho ou numa linha destaca o par correspondente e mostra valor e parcela.
+* Nos modos de daltonismo, cada categoria tem a sua textura.",High,5,resumo,sprint-4
+120,5,Story,Entradas e saídas dos últimos seis meses,,"*História:* Como alguém que acompanha a evolução das contas, quero comparar os últimos meses, para ver se estou gastando mais do que ganho.
+
+*Critérios de aceite*
+* Barras divergentes: entradas acima e saídas abaixo da mesma linha; a legenda explica a posição.
+* Dica com entradas, saídas e saldo ao passar o mouse ou focar um mês pelo teclado.
+* Botão ""Ver tabela"" com os mesmos números.
+* Clicar num mês abre o resumo daquele mês.",High,5,resumo,sprint-5
+121,5,Story,Últimos lançamentos no resumo,,"*História:* Como alguém que acabou de registrar um gasto, quero vê-lo no resumo, para conferir se ficou certo.
+
+*Critérios de aceite*
+* Os seis lançamentos mais recentes do mês, com a data.
+* Link ""Ver todos"" quando houver mais.
+* Mês sem lançamentos mostra o botão ""Novo lançamento"".",Medium,1,resumo,sprint-5
+122,6,Story,Escolher o modo de visão de cores,,"*História:* Como pessoa com daltonismo, quero escolher meu tipo de visão, para que os gráficos usem cores que eu distingo.
+
+*Critérios de aceite*
+* Botão ""Visão de cores"" em todas as páginas, mostrando o modo atual.
+* Painel com Padrão, Protanopia, Deuteranopia e Tritanopia, cada um com uma descrição simples e amostras da própria paleta.
+* A troca vale na hora, com transição suave (sem animação para quem pede menos movimento), e fica salva.
+* Orientação para quem não sabe o próprio tipo: escolher a opção em que as amostras parecem mais diferentes.",Highest,5,visao-de-cores,sprint-4
+123,6,Task,Aplicar a paleta antes da primeira pintura,,"*Objetivo:* Evitar que a página apareça por um instante com a paleta errada.
+
+*Critérios de aceite*
+* Um script no <head> lê a preferência salva e marca o <html> antes de a página aparecer.
+* Recarregar a página não mostra a paleta padrão por um instante.
+* A marcação continua certa no modo de desenvolvimento (React StrictMode).",High,3,visao-de-cores,sprint-4
+124,6,Story,Texturas nos gráficos,,"*História:* Como pessoa com daltonismo, quero que as categorias também tenham texturas, para diferenciá-las mesmo quando as cores parecem próximas.
+
+*Critérios de aceite*
+* Opções Automático, Sempre e Nunca; no automático, as texturas ligam nos modos de daltonismo.
+* Cada categoria tem uma textura própria (listras em 45° ou 135°, pontos ou trama); ""Outros"" é sempre hachurado.
+* Texturas em tom sobre tom, só em áreas pequenas (faixa de gastos e amostras).",High,3,visao-de-cores,sprint-4
+125,6,Story,Convite para ajustar as cores na primeira visita,,"*História:* Como pessoa com daltonismo que abre o app pela primeira vez, quero ser avisada de que existe um ajuste de cores, para não precisar procurar.
+
+*Critérios de aceite*
+* Faixa ""Tem daltonismo?"" com os botões ""Ajustar cores"" e ""Agora não"".
+* Some depois que a pessoa escolhe um modo ou dispensa o convite.",Medium,1,visao-de-cores,sprint-4
+126,6,Task,Revisar se alguma informação depende só da cor,,"*Objetivo:* Garantir que toda informação passada por cor também seja passada de outro jeito.
+
+*Critérios de aceite*
+* Entradas e saídas: sinais + e − e posição no gráfico.
+* Categorias: ícone e nome.
+* Erros de formulário: ícone, texto e borda mais grossa.
+* Conferido com a simulação ""sem cores"".",High,2,visao-de-cores,sprint-4
+127,6,Story,Ver como uma pessoa com daltonismo enxerga,,"*História:* Como familiar sem daltonismo, quero ver a tela como uma pessoa com daltonismo vê, para entender a diferença e ajudar melhor.
+
+*Critérios de aceite*
+* Opções: protanopia, deuteranopia, tritanopia e sem cores (acromatopsia).
+* Filtros SVG com as mesmas matrizes usadas na validação das paletas.
+* Faixa ""Simulando..."" com o botão ""Parar simulação"".
+* Não muda a paleta escolhida e não fica salva.",Medium,3,visao-de-cores,sprint-5
+128,7,Task,Navegação por teclado e leitores de tela,,"*Objetivo:* Garantir que o app funcione sem mouse e com leitor de tela.
+
+*Critérios de aceite*
+* Foco visível de 3px em todos os controles.
+* Diálogos nativos: o foco fica preso dentro, Esc fecha e o foco volta ao botão que abriu.
+* Campos com rótulo e erros ligados por aria-describedby.
+* Avisos numa região ""status""; gráficos com tabela equivalente.",High,3,qualidade,sprint-5
+129,7,Task,Layout responsivo do celular ao desktop,,"*Objetivo:* Deixar todas as telas usáveis de 375px até telas largas.
+
+*Critérios de aceite*
+* Sem rolagem horizontal a partir de 375px.
+* No celular, abas de navegação sob o cabeçalho e botão ""+"" com o nome acessível ""Novo lançamento"".
+* Conta do mês, gráficos e tabelas legíveis em 375px.",High,3,qualidade,sprint-5
+130,7,Task,Revisão visual nos quatro modos de visão,,"*Objetivo:* Encontrar problemas visuais antes da entrega.
+
+*Critérios de aceite*
+* Capturas de cada página em 1440px e 390px nos quatro modos.
+* Cada problema encontrado vira um bug no backlog.",Medium,2,qualidade,sprint-6
+131,7,Bug,Rótulos da conta do mês invadem a tabela no desktop,,"*Como reproduzir:* Abrir o Resumo numa janela com 1440px de largura: ""entradas"", ""saídas"" e ""sobraram"" passam por cima da coluna ""Para onde foi o dinheiro"".
+
+*Causa:* O tamanho dos números seguia a largura da janela, e não a da coluna.
+
+*Correção:* Tamanho calculado pela largura do contêiner (container queries) e mais espaço para a coluna da conta.",High,2,qualidade,sprint-6
+132,7,Bug,"Botão ""+"" encolhido no cabeçalho do celular",,"*Como reproduzir:* Abrir o app com 375px de largura: o ícone ""+"" do botão ""Novo lançamento"" aparece minúsculo.
+
+*Causa:* O CSS global era carregado depois dos módulos, e o padding de .botao vencia o do botão (mesma especificidade).
+
+*Correção:* Importar globals.css antes dos componentes no layout.",High,1,qualidade,sprint-6
+133,7,Task,Ajustar textos do rodapé e do painel de visão,,"*Objetivo:* Aplicar os ajustes de texto pedidos na revisão.
+
+*Critérios de aceite*
+* Remover o texto do rodapé sobre onde os dados ficam guardados.
+* Remover o texto de ajuda abaixo da simulação.
+* Trocar o rótulo ""Ver como outra pessoa enxerga"" por ""Ver como uma pessoa com daltonismo enxerga"".",Low,1,qualidade,sprint-6
+134,7,Task,Testes de ponta a ponta dos fluxos principais,,"*Objetivo:* Automatizar com Playwright os fluxos que mais quebram.
+
+*Critérios de aceite*
+* Cenários: validação do formulário, salvar, editar, excluir e desfazer, lançamento em outro mês, troca de paleta, simulação e busca sem acento.
+* Os testes rodam no build de produção, sem erros no console.",Medium,5,qualidade,sprint-6
+135,7,Task,Testes unitários de cálculos e formatação,,"*Objetivo:* Proteger as regras de negócio contra regressões.
+
+*Critérios de aceite*
+* Cobrir resumo do mês, gastos por categoria, série mensal e leitura de valores digitados.
+* Rodar com um script npm (por exemplo, npm test).",Medium,3,qualidade,sprint-6
+136,7,Task,"Build de produção, página 404 e README",,"*Objetivo:* Deixar o projeto pronto para entregar.
+
+*Critérios de aceite*
+* npm run build gera as páginas estáticas sem avisos.
+* Página 404 em português com link para o resumo.
+* README em português: como rodar, scripts, visão de cores e validação das paletas.",High,2,qualidade,sprint-6
+137,7,Task,Publicar o app na Vercel,,"*Objetivo:* Ter um link público para a avaliação.
+
+*Critérios de aceite*
+* Deploy a partir do repositório, com o build de produção.
+* Link público testado no celular e no desktop.",Medium,2,qualidade,sprint-6
+138,7,Task,Preparar a demonstração,,"*Objetivo:* Apresentar o projeto mostrando a adaptação de cores funcionando.
+
+*Critérios de aceite*
+* Roteiro: registrar um lançamento, trocar para cada modo de visão, mostrar a simulação ""sem cores"" e rodar npm run paletas.
+* Dados de exemplo restaurados antes de apresentar.",Medium,2,qualidade,sprint-6

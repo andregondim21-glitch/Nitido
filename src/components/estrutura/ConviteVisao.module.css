@@ -1,0 +1,23 @@
+.convite {
+  border-bottom: 1px solid var(--fio);
+  background: var(--folha);
+}
+
+.linha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  padding-block: 14px;
+}
+
+.linha p {
+  max-width: 62ch;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}

@@ -1,0 +1,117 @@
+.secao {
+  display: grid;
+  align-content: start;
+  gap: 20px;
+  container-type: inline-size;
+}
+
+/* Três colunas: operador, valor e anotação. Cada linha herda as colunas (subgrid),
+   então os algarismos ficam alinhados como numa conta armada. O corpo dos números
+   acompanha a largura disponível: ~6,8em de conta mais ~150px de anotação. */
+.conta {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  column-gap: 0.28em;
+  font-size: clamp(1.75rem, calc((100cqi - 150px) / 6.8), 4.5rem);
+  line-height: 1.08;
+}
+
+.linha {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+  align-items: baseline;
+  padding-block: 0.08em;
+}
+
+.linha dd {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / 3;
+  grid-row: 1;
+  margin: 0;
+}
+
+.linha dd::before {
+  grid-column: 1;
+  content: "";
+  font-weight: 300;
+}
+
+.linha[data-operador="menos"] dd::before {
+  content: "−";
+  content: "−" / "";
+}
+
+.linha[data-operador="igual"] dd::before {
+  content: "=";
+  content: "=" / "";
+}
+
+.linha dt {
+  grid-column: 3;
+  grid-row: 1;
+  display: grid;
+  padding-left: 0.9rem;
+  font-size: var(--t1);
+  line-height: 1.2;
+}
+
+.detalhe {
+  color: var(--tinta-3);
+  font-size: var(--t-1);
+}
+
+.quantia {
+  grid-column: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.35em;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.simbolo {
+  font-size: 0.4em;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--tinta-2);
+}
+
+/* O traço da soma: só sob operador e valor, como no caderno. */
+.resultado dd {
+  margin-top: 0.1em;
+  padding-top: 0.14em;
+  border-top: 4px solid var(--tinta);
+}
+
+.resultado .quantia {
+  font-weight: 800;
+}
+
+.resultado dt {
+  font-weight: 700;
+}
+
+.nota {
+  max-width: 34ch;
+  color: var(--tinta-2);
+}
+
+@container (max-width: 460px) {
+  .conta {
+    font-size: clamp(1.75rem, calc((100cqi - 104px) / 6.8), 3rem);
+  }
+
+  .linha dt {
+    padding-left: 0.6rem;
+    font-size: var(--t0);
+  }
+
+  .detalhe {
+    font-size: var(--t-2);
+  }
+}

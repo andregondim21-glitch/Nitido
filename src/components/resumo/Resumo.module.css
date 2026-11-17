@@ -1,0 +1,54 @@
+.grade {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(56px, 7vw, 88px) clamp(24px, 4vw, 56px);
+}
+
+/* Primeira linha: quanto entrou e saiu no mês e nos meses anteriores. */
+.conta {
+  grid-column: 1 / span 6;
+}
+
+.fluxo {
+  grid-column: 7 / -1;
+}
+
+/* Segunda linha: para onde foi o dinheiro e os lançamentos mais recentes. */
+.destino {
+  grid-column: 1 / span 7;
+}
+
+.recentes {
+  grid-column: 8 / -1;
+}
+
+.topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
+  margin-bottom: 8px;
+}
+
+.titulo {
+  font-size: var(--t2);
+}
+
+.vazio {
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+  padding-block: 12px;
+  color: var(--tinta-2);
+}
+
+@media (max-width: 1000px) {
+  .conta,
+  .fluxo,
+  .destino,
+  .recentes {
+    grid-column: 1 / -1;
+  }
+}

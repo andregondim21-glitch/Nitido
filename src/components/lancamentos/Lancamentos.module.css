@@ -1,0 +1,62 @@
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  max-width: 880px;
+}
+
+.grupoTipo {
+  padding: 0;
+  border: 0;
+}
+
+.busca {
+  flex: 1 1 220px;
+}
+
+.totais {
+  max-width: 880px;
+  margin-top: 20px;
+  color: var(--tinta-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.totais strong {
+  color: var(--tinta);
+}
+
+.dias {
+  display: grid;
+  gap: 28px;
+  max-width: 880px;
+  margin-top: 28px;
+}
+
+.dia {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding: 0 10px 8px 4px;
+  border-bottom: 1.5px solid var(--tinta);
+  font-size: var(--t0);
+  font-weight: 800;
+}
+
+.saldoDia {
+  color: var(--tinta-2);
+  font-size: var(--t-1);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.vazio {
+  display: grid;
+  justify-items: start;
+  gap: 14px;
+  max-width: 56ch;
+  margin-top: 36px;
+  color: var(--tinta-2);
+}

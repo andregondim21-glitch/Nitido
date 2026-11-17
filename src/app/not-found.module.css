@@ -1,0 +1,16 @@
+.pagina {
+  display: grid;
+  justify-items: start;
+  gap: 20px;
+  padding-block: 96px;
+}
+
+.titulo {
+  font-size: var(--t4);
+  font-weight: 800;
+}
+
+.texto {
+  max-width: 48ch;
+  color: var(--tinta-2);
+}

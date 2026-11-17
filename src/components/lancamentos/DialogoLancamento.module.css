@@ -1,0 +1,167 @@
+.dialogo {
+  width: min(640px, calc(100vw - 24px));
+  max-height: calc(100dvh - 24px);
+  margin: auto;
+  padding: 0;
+  border: 2px solid var(--tinta);
+  border-radius: var(--raio-g);
+  background: var(--papel);
+  color: var(--tinta);
+}
+
+.dialogo::backdrop {
+  background: rgb(0 0 0 / 0.45);
+}
+
+.formulario {
+  display: grid;
+  gap: 20px;
+  padding: clamp(20px, 4vw, 32px);
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.topo h2 {
+  font-size: var(--t3);
+  letter-spacing: -0.01em;
+}
+
+.tipo {
+  padding: 0;
+  border: 0;
+}
+
+.tipo :global(.segmentos) label {
+  min-width: 124px;
+  justify-content: center;
+  font-size: var(--t0);
+}
+
+.linhaDupla {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.comPrefixo {
+  position: relative;
+}
+
+.comPrefixo span {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  color: var(--tinta-2);
+  font-weight: 700;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.comPrefixo input {
+  padding-left: 42px;
+  font-size: var(--t1);
+  font-weight: 700;
+}
+
+.categorias {
+  padding: 0;
+  border: 0;
+}
+
+.categorias legend {
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.opcoes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.opcao {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 8px 10px;
+  border: 1.5px solid var(--fio);
+  border-radius: var(--raio);
+  background: var(--folha);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.opcao:hover {
+  border-color: var(--tinta);
+}
+
+.opcao input {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.opcao:has(input:checked) {
+  border: 3px solid var(--tinta);
+  padding: 6.5px 8.5px;
+  font-weight: 800;
+}
+
+.opcao:has(input:focus-visible) {
+  outline: 3px solid var(--tinta);
+  outline-offset: 2px;
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+.excluir {
+  margin-right: auto;
+}
+
+@media (max-width: 560px) {
+  .linhaDupla {
+    grid-template-columns: 1fr;
+  }
+
+  .opcoes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tipo :global(.segmentos) {
+    display: flex;
+  }
+
+  .tipo :global(.segmentos) label {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .acoes {
+    justify-content: stretch;
+  }
+
+  .acoes > * {
+    flex: 1;
+  }
+
+  .excluir {
+    flex-basis: 100%;
+    order: 3;
+  }
+}

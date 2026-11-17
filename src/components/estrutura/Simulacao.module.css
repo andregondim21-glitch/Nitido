@@ -1,0 +1,33 @@
+.filtros {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.faixa {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 15;
+  border-top: 2px solid var(--tinta);
+  background: var(--folha);
+}
+
+.linha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 20px;
+  padding-block: 12px;
+}
+
+.linha p {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.icone {
+  flex: none;
+}
